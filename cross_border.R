@@ -70,7 +70,7 @@ stargazer(coeftest(lm(con~factor(nat)+ic+gdp*dcb*ps,data=dta),vcovCL,cluster=dta
 
 ######################## use goverment response index #########################
 
-mr_raw<-read_xlsx('C:/Users/BongBong/Desktop/nat_ac/OxCGRT_timeseries_all.xlsx',sheet = 'c7_movementrestrictions') # movement restrictions
+mr_raw<-read_xlsx('C:/Users/BongBong/Desktop/nat_ac/OxCGRT_data/OxCGRT_timeseries_all.xlsx',sheet = 'c7_movementrestrictions') # movement restrictions
 
 mr<-mr_raw[mr_raw$country_name %in% names,]   # here alphabetical ordering becomes importand
 mr.2020<-mr[, -grep("2021", colnames(mr))]

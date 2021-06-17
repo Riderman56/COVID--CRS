@@ -1,4 +1,4 @@
-source('C:/Users/BongBong/Desktop/nat_ac/pre_reg_wls_newic.R')
+source('C:/Users/BongBong/Desktop/nat_ac/pre_reg.R')
 
 ##########################################################################################
 ########################## get permanent component of gdp ################################
@@ -111,7 +111,7 @@ title('beta_u (red), beta_perm (blue) and beta_tran (yellow)')
 
 c.dta=dta[dta$pit!=1,]
 c.dta$nat==dta.p$nat
-dta.p.c=data.frame(dta.p,'mc'=c.dta$mc,'ps'=c.dta$ps,'ic'=c.dta$ic)
+dta.p.c=data.frame(dta.p,'mc'=c.dta$mc,'ps'=c.dta$ps,'ic'=c.dta$ic,'sh'=c.dta$sh)
 
 ############## rerunning regressions with intersections #######################
 
@@ -146,3 +146,9 @@ dta.p.c=data.frame(dta.p.c,'year'=year(dta.p.c$pit,start = 2006,sq=2))
 
 stargazer(coeftest(norm.c,vcovCL,cluster=dta.p.c[,c('nat','year')]),coeftest(perm.c,vcovCL,cluster=dta.p.c[,c('nat','year')]),coeftest(tran.c,vcovCL,cluster=dta.p.c[,c('nat','year')]),type = 'text',omit = 'factor',omit.labels = 'Country fixed effects?')
 stargazer(coeftest(norm.i,vcovCL,cluster=dta.p.c[,c('nat','year')]),coeftest(perm.i,vcovCL,cluster=dta.p.c[,c('nat','year')]),coeftest(tran.i,vcovCL,cluster=dta.p.c[,c('nat','year')]),type = 'text',omit = 'factor',omit.labels = 'Country fixed effects?')
+
+# for comparison with us data
+
+perm.sh<-lm(inc~factor(nat)+gdp.p*sh*ps+ic,data = dta.p.c)
+tran.sh<-lm(inc~factor(nat)+gdp.t*sh*ps+ic,data = dta.p.c)
+norm.sh<-lm(inc~factor(nat)+gdp*sh*ps+ic,data = dta.p.c)

@@ -1,4 +1,4 @@
-source('C:/Users/BongBong/Desktop/nat_ac/pre_reg_wls_newic.R')
+source('C:/Users/BongBong/Desktop/nat_ac/pre_reg.R')
 
 ########################## define helping routine    #####################################
 

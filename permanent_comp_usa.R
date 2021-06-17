@@ -1,4 +1,4 @@
-source('C:/Users/BongBong/Desktop/nat_ac/vgl_us.R')
+source('C:/Users/BongBong/Desktop/nat_ac/vgl_usa.R')
 
 ##########################################################################################
 ########################## get permanent component of gsp ################################
@@ -80,6 +80,7 @@ stargazer(coeftest(permreg,vcovCL,cluster=dta.us.p[,c('state','year')]),type=out
 
 permreg=glm(inc~factor(state)+gsp*up,data = dta.us.p,weights=dta.us.p$pop)
 stargazer(coeftest(permreg,vcovCL,cluster=dta.us.p[,c('state','year')]),type=output,omit = 'factor')
+
 
 # look at subperiods (after 2015)
 
