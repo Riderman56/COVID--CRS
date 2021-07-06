@@ -8,6 +8,8 @@ util<-function(c,mc=999){
   log(min(c,mc))
 }
 
+scenario<-function(mc=999,ps=0,p=0.5)
+{
 # set seed and # simulated incomes
 
 set.seed(123)
@@ -15,23 +17,28 @@ g=10000
 
 # set exogeneous variables
 
-mc=50#40            # consumption restrictive measures - lower = stricter 
-ps=10#15            # transfer compensation for covid related losses
+mc=mc#40            # consumption restrictive measures - lower = stricter 
+ps=ps#15            # transfer compensation for covid related losses
 
-ep=30               # mean / expected production
-sd=5                # standard deviation of production
+ep=35               # mean / expected production
+sd=8                # standard deviation of production
 
-cf=8                # standard deviation of common factor
+cf=2                # standard deviation of common factor
 
-p=1                 # price of full risk sharing compared to autarky (linear)
+p=p                 # price of full risk sharing compared to autarky (linear)
 
 # simulate income for A and B (two ex ante identical countries)
 
-y_a<-rnorm(g,ep,sd)+rnorm(g,0,cf)
+com<-rnorm(g,0,cf)
 
-y_b<-rnorm(g,ep,sd)+rnorm(g,0,cf)
+y_a<-rnorm(g,ep,sd)+com
+sd(y_a)
+
+y_b<-rnorm(g,ep,sd)+com
+sd(y_b)
 
 y_s<-(y_a+y_b)/2
+sd(y_s)
 
 # grid for possible degrees of risk sharing (0 no risk sharing at all 1 full risk sharing)
 
@@ -55,4 +62,16 @@ for (i in 1:g) {
 }
 res_b=colMeans(UB)
 plot(res_b)
+}
 
+# basecase
+scenario()
+
+# restrictive measures
+scenario(mc=40)
+
+# policy support
+scenario(ps=10)
+
+# interaction of policy support and restrictive measures
+scenario(ps=10,mc=40)
