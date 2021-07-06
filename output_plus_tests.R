@@ -1,3 +1,5 @@
+source('C:/Users/BongBong/Desktop/nat_ac/pre_reg.R')
+
 output='text'
 
 dta$year=year(dta$pit,start = 2006)
@@ -68,3 +70,9 @@ stargazer(coeftest(lm((gdp-gni)~factor(nat):gdp*mc+gdp*ps+ic,data = dta),vcovCL,
 stargazer(coeftest(lm((gdp-gni)~gdp*ps+factor(nat):gdp:mc+ic,data = dta),vcovCL,cluster=dta[,c('nat','year')]),type='text')
 
 stargazer(coeftest(lm((gdp-gni)~factor(nat)+pop*gdp+ic,data = dta),vcovCL,cluster=dta[,c('nat','year')]),type='text')
+
+# supporting argument for the pattern of restrictions decreasing risk sharing and policy support helping to reduce this impact
+
+dta$ratio=as.numeric(dta$mc)/as.numeric(dta$ps)
+dta$ratio[dta$pit<56]=0
+stargazer(coeftest(lm(inc~factor(nat)+ic+gdp*ratio,data = dta),vcovCL,cluster=dta[,c('nat','year')]),type=output)

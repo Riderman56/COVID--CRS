@@ -67,3 +67,9 @@ stargazer(asym,coeftest(asym,vcovCL,cluster=dta[,c('nat','year')]),type = 'text'
 
 sh.reg<-lm(inc~factor(nat)+ic+gdp*ps*sh,data = dta)
 stargazer(sh.reg,coeftest(sh.reg,vcovCL,cluster=dta[,c('nat','year')]),type = 'text',title = 'Triple interaction regression: Consumption - asym?',style = 'qje',omit = 'factor',omit.labels = ' Country fixed effects')
+
+###################################################################################
+############## get Session Info ###################################################
+###################################################################################
+
+sessionInfo()
