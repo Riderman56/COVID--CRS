@@ -16,6 +16,7 @@ wls=0
 # install.packages('stargazer')
 # install.packages('vars')
 # install.packages("PerformanceAnalytics")
+# install.packages('sessioninfo')
 
 library(readxl)
 library(car)
@@ -27,6 +28,7 @@ library(stargazer)
 library(ggplot2)
 library(vars)
 library(PerformanceAnalytics)
+library(sessioninfo)
 
 ################################# define helping routines   #################################################
 
@@ -319,6 +321,7 @@ for (i in 1:nrow(dta)) {
 }
 
 if(wls==0){
+  dta$Gdp=dta$GDP
   dta$GDP=1
 }
 
@@ -334,6 +337,7 @@ cor(dta$inc,dta$gdp)
 
 cor(dta$con[-(56:59)],dta$gdp[-(56:59)])  # pre 2020
 cor(dta$inc[-(56:59)],dta$gdp[-(56:59)])
+chart.Correlation(dta[dta$pit<=55,c('gdp','con','inc')])
 
 cor(dta$con[56:59],dta$gdp[56:59])  # 2020
 cor(dta$inc[56:59],dta$gdp[56:59])

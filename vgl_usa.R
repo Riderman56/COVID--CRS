@@ -176,3 +176,10 @@ dta.us$gmi=dta.us$gsp-dta.us$inc
 
 chan.reg=glm(gmi~factor(state)+ic+gsp*ps*mr,data = dta.us,weights=dta.us$pop)
 stargazer(coeftest(first.reg,vcovCL,cluster=dta.us[,c('state','year')]),coeftest(chan.reg,vcovCL,cluster=dta.us[,c('state','year')]),type=output,omit = 'factor')
+
+################ look for assymetrics #############################################
+
+dta.us$up=dta.us$gsp>0
+
+asym<-lm(inc~factor(state)+ic+gsp*up,data = dta.us)
+stargazer(asym,coeftest(asym,vcovCL,cluster=dta.us[,c('state','year')]),type = 'text',title = 'Triple interaction regression: Consumption - asym?',style = 'qje',omit = 'factor',omit.labels = ' Country fixed effects')
